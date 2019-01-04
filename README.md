@@ -9,3 +9,9 @@
 推荐使用 Visual Studio Code 或 Intellij IDEA 的 PlantUML 插件编辑、预览和导出图表：
 
 https://github.com/RicardoNiepel/C4-PlantUML#snippets-for-visual-studio-code
+
+## 效果展示
+
+### System Landscape Diagram
+
+![](/out/system-landscape/System Landscape Diagram for Big Bank plc.png)
