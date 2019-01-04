@@ -1,7 +1,7 @@
 @startuml
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
 
-title System Context Diagram for Internet Banking System
+title Container Diagram for Internet Banking System
 
 Person(customer, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.")
 
