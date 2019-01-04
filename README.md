@@ -14,4 +14,16 @@ https://github.com/RicardoNiepel/C4-PlantUML#snippets-for-visual-studio-code
 
 ### System Landscape Diagram
 
-![](/out/system-landscape/System Landscape Diagram for Big Bank plc.png)
+![System Landscape Diagram](/out/system-landscape/System%20Landscape%20Diagram%20for%20Big%20Bank%20plc.png)
+
+### System Context Diagram
+
+![System Context Diagram](/out/system-context/System%20Context%20Diagram%20for%20Internet%20Banking%20System.png)
+
+### Container Diagram
+
+![Container Diagram](/out/container/Container%20Diagram%20for%20Internet%20Banking%20System.png)
+
+### Component Diagram
+
+![Component Diagram](/out/component/Component%20Diagram%20for%20Internet%20Banking%20System%20-%20API%20Application.png)
