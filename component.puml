@@ -1,0 +1,42 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Component.puml
+
+title Component Diagram for Internet Banking System - API Application
+
+Container(spa, "Single-Page Application", "JavaScript and Angular", "Provides all of the Internet baning functionality to customers via their web browser.")
+Container(mobile, "Mobile App", "Xamarin", "Provides a limited subset of the Internet banking functionality to customers via their mobile device.")
+ContainerDb(database, "Database", "Relational Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.")
+
+Container_Boundary(backend_api_boundary, "API Application"){
+    Component(sign_in_controller, "Sign In Controller", "Spring MVC Rest Controller", "Allow users to sign in to the Internet Banking System.")
+    Component(reset_password_controller, "Reset Password Controller", "Spring MVC Rest Controller", "Allows users to reset their passwords with a single use URL.")
+    Component(accounts_summary_controller, "Accounts Summary Controller", "Spring MVC Rest Controller", "Provides customers with a summary of their bank accounts.")
+    Component(security_component, "Sucurity Component", "Spring Bean", "Provides functionality related to signing in, changing password, etc.")
+    Component(email_component, "E-mail Component", "Spring Bean", "Sends e-mails to users.")
+    Component(mainframe_facade, "Mainframe Banking System Facade", "Spring Bean", "A facade onto the mainframe banking system.")
+}
+
+System_Ext(mainframe, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+System_Ext(email_system, "E-mail System", "The internal Microsoft Exchange e-mail system")
+
+Rel(spa, sign_in_controller, "Uses", "JSON/HTTPS")
+Rel(spa, reset_password_controller, "Uses", "JSON/HTTPS")
+Rel(spa, accounts_summary_controller, "Uses", "JSON/HTTPS")
+
+Rel(mobile, sign_in_controller, "Uses", "JSON/HTTPS")
+Rel(mobile, reset_password_controller, "Uses", "JSON/HTTPS")
+Rel(mobile, accounts_summary_controller, "Uses", "JSON/HTTPS")
+
+Rel(sign_in_controller, security_component, "Uses")
+
+Rel(reset_password_controller, email_component, "Uses")
+
+Rel(accounts_summary_controller, mainframe_facade, "Uses")
+
+Rel(mainframe_facade, mainframe, "Uses", "XML/HTTPS")
+
+Rel(email_component, email_system, "Sends e-mail using", "SMTP")
+
+Rel(security_component, database, "Reads from and writes to", "JDBC")
+
+@enduml
