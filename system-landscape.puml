@@ -1,0 +1,33 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Context.puml
+
+title System Landscape Diagram for Big Bank plc
+
+Person(customer, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.")
+
+Enterprise_Boundary(big_bank_plc, "Big Bank plc"){
+    Person_Ext(back_office_staff, "Back Office Staff", "Administration and support staff within the bank.")
+    Person_Ext(customer_service_staff, "Customer Service Staff", "Customer service within the bank.")
+
+    System(banking_system, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
+
+    System_Ext(mainframe, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+    System_Ext(email_system, "E-mail System", "The internal Microsoft Exchange e-mail system")
+    System_Ext(atm, "ATM", "Allows customers to with draw cash.")
+}
+
+Rel(customer, banking_system, "Uses")
+Rel(customer, atm, "Withdraws cash using")
+Rel_Back(customer, email_system, "Sends e-mail to")
+Rel(customer, customer_service_staff, "Asks questions to", "Telephone")
+
+Rel_Neighbor(back_office_staff, mainframe, "Uses")
+
+Rel_Neighbor(customer_service_staff, mainframe, "Uses")
+
+Rel(banking_system, mainframe, "Uses")
+Rel_Neighbor(banking_system, email_system, "Sends e-mail using")
+
+Rel(atm, mainframe, "Uses")
+
+@enduml
