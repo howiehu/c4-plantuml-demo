@@ -1,0 +1,36 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
+
+title System Context Diagram for Internet Banking System
+
+Person(customer, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.")
+
+System_Boundary(system_boundary, "Internet Banking System"){
+    Container(web_app, "Web Application", "Java and Spring MVC", "Delivers the static content and the Internet banking single page application.")
+    Container(spa, "Single-Page Application", "JavaScript and Angular", "Provides all of the Internet baning functionality to customers via their web browser.")
+    Container(mobile, "Mobile App", "Xamarin", "Provides a limited subset of the Internet banking functionality to customers via their mobile device.")
+    Container(backend_api, "API Application", "Java and Spring MVC", "Provides Internet banking functionality via a JSON/HTTPS API.")
+    ContainerDb(database, "Database", "Relational Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.")
+}
+
+System_Ext(mainframe, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+System_Ext(email_system, "E-mail System", "The internal Microsoft Exchange e-mail system")
+
+
+Rel(customer, web_app, "Uses", "HTTPS")
+Rel(customer, spa, "Uses")
+Rel(customer, mobile, "Uses")
+
+Rel_Neighbor(web_app, spa, "Delivers")
+
+Rel(spa, backend_api, "Uses", "JSON/HTTPS")
+
+Rel(mobile, backend_api, "Uses", "JSON/HTTPS")
+
+Rel(backend_api, mainframe, "Uses", "XML/HTTPS")
+Rel_Neighbor(backend_api, email_system, "Sends e-mail using", "SMTP")
+Rel_Back(customer, email_system, "Sends e-mail to")
+
+Rel_Back_Neighbor(database, backend_api, "Reads from and writes to", "JDBC")
+
+@enduml
