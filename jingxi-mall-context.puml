@@ -1,0 +1,27 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Context.puml
+
+title 某在线商城销售系统上下文图
+
+Person(customer, "买家")
+
+System_Ext(alipay, "支付宝")
+
+Person(operator, "产品运营人员")
+
+System_Ext(goods_info, "商品信息系统")
+System(mall, "销售系统")
+System_Ext(warhouse, "库管系统")
+System_Ext(logistics, "物流系统")
+
+Rel(customer, mall, "使用")
+Rel_Back(customer, alipay, "发送支付入口给")
+
+Rel_Neighbor(operator, mall, "使用")
+
+Rel(mall, goods_info, "使用")
+Rel_Neighbor(mall, alipay, "使用...进行支付")
+Rel(mall, warhouse, "使用")
+Rel(mall, logistics, "使用")
+
+@enduml
