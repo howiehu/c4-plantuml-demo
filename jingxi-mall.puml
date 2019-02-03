@@ -1,0 +1,65 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Context.puml
+
+title 某在线商城系统全景图
+
+Person(customer, "买家")
+
+System_Ext(alipay, "支付宝")
+System_Ext(sf_express, "顺丰")
+
+Enterprise_Boundary(jingxi_mall, "某在线商城"){
+    Person(operator, "产品运营人员")
+    Person(supporter, "客服人员")
+    Person(warhouse_keeper, "仓库管理员")
+    Person(purchaser, "采购人员")
+    Person(order_speciaist, "订单专员")
+
+    System(goods_info, "商品信息系统")
+    System(mall, "销售系统")
+    System(after_sales, "售后系统")
+    System(customer_service, "客服系统")
+    System(purchase, "采购系统")
+    System(warhouse, "库管系统")
+    System(logistics, "物流系统")
+}
+
+Rel(customer, mall, "使用")
+Rel(customer, after_sales, "使用")
+Rel(customer, customer_service, "使用")
+Rel_Back(customer, alipay, "发送支付入口给")
+
+Rel(operator, mall, "使用")
+Rel(operator, goods_info, "使用")
+Rel(operator, purchase, "使用")
+
+Rel_Neighbor(purchaser, purchase, "使用")
+
+Rel_Back_Neighbor(customer_service, supporter, "使用")
+
+Rel_Neighbor(order_speciaist, after_sales, "使用")
+
+Rel_Neighbor(warhouse_keeper, warhouse, "使用")
+
+Rel(mall, goods_info, "使用")
+Rel_Neighbor(mall, alipay, "使用...进行支付")
+Rel(mall, warhouse, "使用")
+Rel(mall, logistics, "使用")
+
+Rel(after_sales, mall, "使用")
+Rel(after_sales, goods_info, "使用")
+Rel(after_sales, warhouse, "使用")
+Rel(after_sales, logistics, "使用")
+
+Rel(customer_service, mall, "使用")
+
+Rel(purchase, goods_info, "使用")
+Rel(purchase, logistics, "使用")
+
+Rel_Neighbor(logistics, goods_info, "使用")
+Rel_Neighbor(logistics, sf_express, "使用")
+
+Rel(warhouse, logistics, "使用")
+Rel(warhouse, goods_info, "使用")
+
+@enduml
