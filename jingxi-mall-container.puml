@@ -23,8 +23,6 @@ System_Boundary(mall, "销售系统"){
 
     Container(mall_api, "API Application", "Java / Spring MVC / Spring Cloud")
     ContainerDb(mall_db, "Database", "Relational Database Schema")
-
-    System_Ext(api_gateway, "API Gateway")
 }
 
 System_Ext(goods_info, "商品信息系统")
@@ -48,29 +46,16 @@ Rel(spa_admin, bff_web_admin, "使用", "JSON / HTTPS / GraphQL")
 Rel(ios, bff_ios, "使用", "JSON / HTTPS / GraphQL")
 Rel(android, bff_android, "使用", "JSON / HTTPS / GraphQL")
 
-Rel(bff_web, api_gateway, "使用", "JSON / HTTPS / REST")
-Rel(bff_web_admin, api_gateway, "使用", "JSON / HTTPS / REST")
-Rel(bff_ios, api_gateway, "使用", "JSON / HTTPS / REST")
-Rel(bff_android, api_gateway, "使用", "JSON / HTTPS / REST")
+Rel(bff_web, mall_api, "使用", "JSON / HTTPS / REST / API Gateway")
+Rel(bff_web_admin, mall_api, "使用", "JSON / HTTPS / REST / API Gateway")
+Rel(bff_ios, mall_api, "使用", "JSON / HTTPS / REST / API Gateway")
+Rel(bff_android, mall_api, "使用", "JSON / HTTPS / REST / API Gateway")
 
 Rel_Neighbor(mall_api, alipay, "使用", "JSON / HTTPS")
-' Rel_Neighbor(mall_api, api_gateway, "使用", "JSON / HTTPS")
+Rel(mall_api, goods_info, "使用", "JSON / HTTPS / REST / API Gateway")
+Rel(mall_api, warhouse, "使用", "JSON / HTTPS / REST / API Gateway")
+Rel(mall_api, logistics, "使用", "JSON / HTTPS / REST / API Gateway")
 
-Rel_Neighbor(api_gateway, mall_api, "使用", "JSON / HTTPS / REST")
-Rel(api_gateway, goods_info, "使用", "JSON / HTTPS / REST")
-Rel(api_gateway, warhouse, "使用", "JSON / HTTPS / REST")
-Rel(api_gateway, logistics, "使用", "JSON / HTTPS / REST")
-
-Rel_Neighbor(mall_api, mall_db, "读写", "JDBC")
-
-' Rel(customer, mall, "使用")
-' Rel_Back(customer, alipay, "发送支付入口给")
-
-' Rel_Neighbor(operator, mall, "使用")
-
-' Rel(mall, goods_info, "使用")
-' Rel_Neighbor(mall, alipay, "使用...进行支付")
-' Rel(mall, warhouse, "使用")
-' Rel(mall, logistics, "使用")
+Rel_Back_Neighbor(mall_db, mall_api, "读写", "JDBC")
 
 @enduml
