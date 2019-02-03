@@ -1,7 +1,7 @@
 @startuml
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
 
-title 某在线商城销售系统上下文图
+title 某在线商城销售系统容器图
 
 Person(customer, "买家")
 Person(operator, "产品运营人员")
