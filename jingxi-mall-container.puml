@@ -1,0 +1,76 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
+
+title 某在线商城销售系统上下文图
+
+Person(customer, "买家")
+Person(operator, "产品运营人员")
+
+System_Ext(alipay, "支付宝")
+
+System_Boundary(mall, "销售系统"){
+    Container(spa, "Single Page Application", "JavaScript / Vue.js")
+    Container(web, "Web Application", "JavaScript / Node.js")
+    Container(ios, "iOS App", "Swift / iOS SDK")
+    Container(android, "Android App", "Kotlin / Android SDK")
+    Container(spa_admin, "Admin Single Page Application", "JavaScript / Vue.js")
+    Container(web_admin, "Admin Web Application", "JavaScript / Node.js")
+
+    Container(bff_web, "BFF for Web Application", "JavaScript / Node.js / Express")
+    Container(bff_web_admin, "BFF for Admin Web Application", "JavaScript / Node.js / Express")
+    Container(bff_ios, "BFF for iOS App", "JavaScript / Node.js / Express")
+    Container(bff_android, "BFF for Android App", "JavaScript / Node.js / Express")
+
+    Container(mall_api, "API Application", "Java / Spring MVC / Spring Cloud")
+    ContainerDb(mall_db, "Database", "Relational Database Schema")
+
+    System_Ext(api_gateway, "API Gateway")
+}
+
+System_Ext(goods_info, "商品信息系统")
+System_Ext(warhouse, "库管系统")
+System_Ext(logistics, "物流系统")
+
+Rel(customer, spa, "使用")
+Rel(customer, web, "使用", "浏览器 / HTTPS")
+Rel(customer, ios, "使用")
+Rel(customer, android, "使用")
+
+Rel(operator, spa_admin, "使用")
+Rel(operator, web_admin, "使用", "浏览器 / HTTPS")
+
+Rel_Back_Neighbor(spa, web, "托管", "浏览器 / HTTPS")
+Rel(spa, bff_web, "使用", "JSON / HTTPS / GraphQL")
+
+Rel_Back_Neighbor(spa_admin, web_admin, "托管", "浏览器 / HTTPS")
+Rel(spa_admin, bff_web_admin, "使用", "JSON / HTTPS / GraphQL")
+
+Rel(ios, bff_ios, "使用", "JSON / HTTPS / GraphQL")
+Rel(android, bff_android, "使用", "JSON / HTTPS / GraphQL")
+
+Rel(bff_web, api_gateway, "使用", "JSON / HTTPS / REST")
+Rel(bff_web_admin, api_gateway, "使用", "JSON / HTTPS / REST")
+Rel(bff_ios, api_gateway, "使用", "JSON / HTTPS / REST")
+Rel(bff_android, api_gateway, "使用", "JSON / HTTPS / REST")
+
+Rel_Neighbor(mall_api, alipay, "使用", "JSON / HTTPS")
+' Rel_Neighbor(mall_api, api_gateway, "使用", "JSON / HTTPS")
+
+Rel_Neighbor(api_gateway, mall_api, "使用", "JSON / HTTPS / REST")
+Rel(api_gateway, goods_info, "使用", "JSON / HTTPS / REST")
+Rel(api_gateway, warhouse, "使用", "JSON / HTTPS / REST")
+Rel(api_gateway, logistics, "使用", "JSON / HTTPS / REST")
+
+Rel_Neighbor(mall_api, mall_db, "读写", "JDBC")
+
+' Rel(customer, mall, "使用")
+' Rel_Back(customer, alipay, "发送支付入口给")
+
+' Rel_Neighbor(operator, mall, "使用")
+
+' Rel(mall, goods_info, "使用")
+' Rel_Neighbor(mall, alipay, "使用...进行支付")
+' Rel(mall, warhouse, "使用")
+' Rel(mall, logistics, "使用")
+
+@enduml
