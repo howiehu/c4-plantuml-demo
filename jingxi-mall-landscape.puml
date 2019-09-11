@@ -15,13 +15,13 @@ Enterprise_Boundary(jingxi_mall, "某在线商城"){
     Person(purchaser, "采购人员")
     Person(order_speciaist, "订单专员")
 
-    System(goods_info, "商品信息系统")
-    System(mall, "销售系统")
-    System(after_sales, "售后系统")
-    System(customer_service, "客服系统")
-    System(purchase, "采购系统")
-    System(warhouse, "库管系统")
-    System(logistics, "物流系统")
+    System(goods_info, "商品信息服务")
+    System(mall, "销售服务")
+    System(after_sales, "售后服务")
+    System(customer_service, "客服服务")
+    System(purchase, "采购服务")
+    System(warhouse, "库管服务")
+    System(logistics, "物流服务")
 }
 
 Rel(customer, mall, "使用")

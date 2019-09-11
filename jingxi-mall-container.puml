@@ -8,7 +8,7 @@ Person(operator, "产品运营人员")
 
 System_Ext(alipay, "支付宝")
 
-System_Boundary(mall, "销售系统"){
+System_Boundary(mall, "销售服务"){
     Container(spa, "Single Page Application", "JavaScript / Vue.js")
     Container(web, "Web Application", "JavaScript / Node.js")
     Container(ios, "iOS App", "Swift / iOS SDK")
@@ -25,9 +25,9 @@ System_Boundary(mall, "销售系统"){
     ContainerDb(mall_db, "Database", "Relational Database Schema")
 }
 
-System_Ext(goods_info, "商品信息系统")
-System_Ext(warhouse, "库管系统")
-System_Ext(logistics, "物流系统")
+System_Ext(goods_info, "商品信息服务")
+System_Ext(warhouse, "库管服务")
+System_Ext(logistics, "物流服务")
 
 Rel(customer, spa, "使用")
 Rel(customer, web, "使用", "浏览器 / HTTPS")
