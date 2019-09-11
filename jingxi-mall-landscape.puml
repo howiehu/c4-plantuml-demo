@@ -11,7 +11,7 @@ System_Ext(sf_express, "顺丰")
 Enterprise_Boundary(jingxi_mall, "某在线商城"){
     Person(operator, "产品运营人员")
     Person(supporter, "客服人员")
-    Person(warhouse_keeper, "仓库管理员")
+    Person(warehouse_keeper, "仓库管理员")
     Person(purchaser, "采购人员")
     Person(order_speciaist, "订单专员")
 
@@ -20,7 +20,7 @@ Enterprise_Boundary(jingxi_mall, "某在线商城"){
     System(after_sales, "售后服务")
     System(customer_service, "客服服务")
     System(purchase, "采购服务")
-    System(warhouse, "库管服务")
+    System(warehouse, "库管服务")
     System(logistics, "物流服务")
 }
 
@@ -39,16 +39,16 @@ Rel_Back_Neighbor(customer_service, supporter, "使用")
 
 Rel_Neighbor(order_speciaist, after_sales, "使用")
 
-Rel_Neighbor(warhouse_keeper, warhouse, "使用")
+Rel_Neighbor(warehouse_keeper, warehouse, "使用")
 
 Rel(mall, goods_info, "使用")
 Rel_Neighbor(mall, alipay, "使用...进行支付")
-Rel(mall, warhouse, "使用")
+Rel(mall, warehouse, "使用")
 Rel(mall, logistics, "使用")
 
 Rel(after_sales, mall, "使用")
 Rel(after_sales, goods_info, "使用")
-Rel(after_sales, warhouse, "使用")
+Rel(after_sales, warehouse, "使用")
 Rel(after_sales, logistics, "使用")
 
 Rel(customer_service, mall, "使用")
@@ -59,7 +59,7 @@ Rel(purchase, logistics, "使用")
 Rel_Neighbor(logistics, goods_info, "使用")
 Rel_Neighbor(logistics, sf_express, "使用")
 
-Rel(warhouse, logistics, "使用")
-Rel(warhouse, goods_info, "使用")
+Rel(warehouse, logistics, "使用")
+Rel(warehouse, goods_info, "使用")
 
 @enduml

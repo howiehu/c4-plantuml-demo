@@ -26,7 +26,7 @@ System_Boundary(mall, "销售服务"){
 }
 
 System_Ext(goods_info, "商品信息服务")
-System_Ext(warhouse, "库管服务")
+System_Ext(warehouse, "库管服务")
 System_Ext(logistics, "物流服务")
 
 Rel(customer, spa, "使用")
@@ -53,7 +53,7 @@ Rel(bff_android, mall_api, "使用", "JSON / HTTPS / REST / API Gateway")
 
 Rel_Neighbor(mall_api, alipay, "使用", "JSON / HTTPS")
 Rel(mall_api, goods_info, "使用", "JSON / HTTPS / REST / API Gateway")
-Rel(mall_api, warhouse, "使用", "JSON / HTTPS / REST / API Gateway")
+Rel(mall_api, warehouse, "使用", "JSON / HTTPS / REST / API Gateway")
 Rel(mall_api, logistics, "使用", "JSON / HTTPS / REST / API Gateway")
 
 Rel_Back_Neighbor(mall_db, mall_api, "读写", "JDBC")

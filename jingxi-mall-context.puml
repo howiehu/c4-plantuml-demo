@@ -11,7 +11,7 @@ Person(operator, "产品运营人员")
 
 System_Ext(goods_info, "商品信息服务")
 System(mall, "销售服务")
-System_Ext(warhouse, "库管服务")
+System_Ext(warehouse, "库管服务")
 System_Ext(logistics, "物流服务")
 
 Rel(customer, mall, "使用")
@@ -21,7 +21,7 @@ Rel_Neighbor(operator, mall, "使用")
 
 Rel(mall, goods_info, "使用")
 Rel_Neighbor(mall, alipay, "使用...进行支付")
-Rel(mall, warhouse, "使用")
+Rel(mall, warehouse, "使用")
 Rel(mall, logistics, "使用")
 
 @enduml
